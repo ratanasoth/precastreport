@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/template.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h2 class="text-primary">
+            View Monthly Report
+        </h2>
+    </div>
+</div>
+<hr />
+<form id="frm" name="frm" method="post" target="_blank" action="~/Report/ViewReport">
+    <label>
+        Date
+        <input type="date" name="rdate" id="rdate" value="" />
+    </label>
+    <button type="submit" class="btn btn-primary btn-xs" style="border-radius:0;padding:3px 2px">View Report</button>
+    <button type="button" id="btnExcel" class="btn btn-success btn-xs" style="border-radius:0;padding:3px 2px">Export to Excel</button>
+    <button type="button" id="btnPdf" class="btn btn-info btn-xs" style="border-radius:0;padding:3px 2px">Export to PDF</button>
+</form>
+<script>
+    var d = new Date();
+    var burl = '@Url.Content("~")';
+    var m = d.getMonth() + 1;
+    var dd = d.getDate();
+    var y = d.getFullYear();
+    m = m < 10 ? "0" + m : m;
+    dd = dd < 10 ? "0" + dd : dd;
+    var cdate = y + "-" + m + "-" + dd;
+    window.onload = function()
+    {
+        $("#rdate").val(cdate);
+    }
+    $(document).ready(function () {
+        $("#btnExcel").click(function () {
+            $("#frm").attr("action", burl + "Report/ViewReport/excel");
+            frm.submit();
+            $("#frm").attr("action", burl + "Report/ViewReport");
+        });
+        $("#btnPdf").click(function () {
+            $("#frm").attr("action", burl + "Report/ViewReport/pdf");
+            frm.submit();
+            $("#frm").attr("action", burl + "Report/ViewReport");
+        });
+    });
+</script>

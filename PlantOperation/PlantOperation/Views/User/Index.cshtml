@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "User List";
+    Layout = "~/Views/Shared/template.cshtml";
+}
+<div class="row">
+    <div class="col-sm-11">
+        <h2 class="text-primary">
+            User List <a class="btn btn-primary btn-xs pull-right" href="~/User/New">
+                        <i class="glyphicon glyphicon-plus-sign"></i> New</a>
+        </h2>
+    </div>
+    
+</div>
+<div class="row" ng-app="ngApp" ng-controller="ctrl">
+    <div class="col-sm-12">
+        <table class="tbl">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Gender</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Group</th>
+                    <th>Username</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="u in users">
+                    <td>{{u.id}}</td>
+                    <td>{{u.firstname}}</td>
+                    <td>{{u.lastname}}</td>
+                    <td>{{u.gender}}</td>
+                    <td>{{u.email}}</td>
+                    <td>{{u.phone}}</td>
+                    <td>{{u.name}}</td>
+                    <td>{{u.username}}</td>
+                    <td>
+                        <a href="~/User/Edit/{{u.id}}" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-edit"></i></a>&nbsp;
+                        <a href="#" class="btn btn-danger btn-xs" userid="{{u.id}}" ng-click="delete($event)"><i class="glyphicon glyphicon-remove"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin-top: 7px">
+            <button class="btn btn-xs btn-primary mybtn" ng-click="goFirstPage()">First</button>
+            <button class="btn btn-xs btn-success mybtn" ng-click="prePage()">Pre</button>
+            <input type="number" value="1" ng-model="currentPage" style="width: 45px" min="1" step="1" max="{{totalPage}}" ng-change="jumpToPage()" /> of {{totalPage}}P 
+            <button class="btn btn-xs btn-success mybtn" ng-click="nextPage()">Next</button>
+            <button class="btn btn-xs btn-primary mybtn" ng-click="goLastPage()">Last</button>
+        </p>
+    </div>
+</div>
+<script src="~/Scripts/angular.min.js"></script>
+<script>
+    var burl = '@Url.Content("~" )';
+    var ngApp = angular.module("ngApp", []);
+    ngApp.controller("ctrl", function ($scope, $http) {
+        $scope.currentPage = 1;
+        // go to the first page
+        goToPage(1);
+        // get toal page of the users table
+        $http.get(burl + "User/GetTotalPage").success(function (data) {
+            $scope.totalPage = Math.ceil(data[0].total);
+        });
+        // go the first page
+        $scope.goFirstPage = function () {
+            goToPage(1);
+            $scope.currentPage = 1;
+        };
+        // go the last page
+        $scope.goLastPage = function () {
+            goToPage($scope.totalPage);
+            $scope.currentPage = $scope.totalPage;
+        };
+        // jump to the specified page
+        $scope.jumpToPage = function () {
+            goToPage($scope.currentPage);
+        };
+        // go next page
+        $scope.nextPage = function () {
+            if ($scope.currentPage < $scope.totalPage) {
+                $scope.currentPage++;
+                goToPage($scope.currentPage);
+            }
+        };
+        // go previous page
+        $scope.prePage = function () {
+            if ($scope.currentPage > 1) {
+                $scope.currentPage--;
+                goToPage($scope.currentPage);
+            }
+        };
+        // delete a user
+        $scope.delete = function ($event) {
+            var btn = $event.currentTarget;
+            var userid = $(btn).attr("userid");
+            var o = confirm("You want to delete?");
+            if (o) {
+                $http({
+                    method: 'POST',
+                    url: burl + "User/Delete",
+                    data: $.param({
+                        "userid": userid
+                    }),
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                }).success(function (data) {
+                    $(btn).parent().parent().remove();
+                });
+            }
+        };
+        // go to page function
+        function goToPage(pageno) {
+            $http({
+                method: 'POST',
+                url: burl + "User/Get",
+                data: $.param({
+                    "pageno": pageno
+                }),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            }).success(function (data) {
+                $scope.users = data;
+            });
+        };
+    });
+</script>

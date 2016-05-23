@@ -1,0 +1,138 @@
+﻿
+@{
+    ViewBag.Title = "Add New User";
+    Layout = "~/Views/Shared/template.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h2 class="text-primary">Create New User</h2> 
+        <hr />
+       
+    </div>
+
+</div>
+<div class="row" ng-app="ngApp" ng-controller="newUserController">
+    <form name="frm" id="frm" method="post" ng-submit="save()">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="control-label col-sm-3 mg-top">First Name</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" value="" required autofocus id="firstname" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3 mg-top">Last Name</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control mg-top" value="" required id="lastname" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3 mg-top">Gender</label>
+                <div class="col-sm-7">
+                    <select class="form-control mg-top" id="gender">
+                        <option value="Male">Male</option>
+                        <option value="Femaile">Female</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3 mg-top">E-mail</label>
+                <div class="col-sm-7">
+                    <input type="email" class="form-control mg-top" value="" id="email" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3 mg-top">Phone Number</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control mg-top" value="" id="phone" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3 mg-top">User Group</label>
+                <div class="col-sm-7">
+                    <select class="form-control mg-top" id="groupid">
+                        <option value="1">Admin</option>
+                        <option value="2">Guest</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3 mg-top">Username</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control mg-top" value="" required id="username" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3 mg-top">Password</label>
+                <div class="col-sm-7">
+                    <input type="password" class="form-control mg-top" value="" id="pass" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3 mg-top">Confirm Password</label>
+                <div class="col-sm-7">
+                    <input type="password" class="form-control mg-top" value="" id="cpass" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label"></label>
+                <div class="col-sm-7">
+                    <button class="btn btn-sm btn-primary mg-top" type="submit">
+                        <i class="glyphicon glyphicon-save"></i> Save
+                    </button>
+                    <button class="btn btn-sm btn-danger mg-top" type="reset">
+                        <i class="glyphicon glyphicon-remove"></i> Cancel
+                    </button>
+                    <a href="~/User" class="btn btn-sm btn-success mg-top">
+                        <i class="glyphicon glyphicon-refresh"></i> Go SBack
+                    </a>
+                    <p class="mg-top text-danger" id="sms"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+        </div>
+    </form>
+</div>
+<script src="~/Scripts/angular.min.js"></script>
+<script>
+    var ngApp = angular.module('ngApp', []);
+    ngApp.controller('newUserController', function ($scope, $http) {
+        $scope.save = function () {
+            var fname = $("#firstname").val();
+            var lname = $("#lastname").val();
+            var gender = $("#gender").val();
+            var email = $("#email").val();
+            var phone = $("#phone").val();
+            var groupid = $("#groupid").val();
+            var username = $("#username").val();
+            var pass = $("#pass").val();
+            var cpass = $("#cpass").val();
+            if (pass!=cpass) {
+                $("#sms").html("Password not matched!");
+            }
+            else {
+                $http({
+                    method: 'POST',
+                    url: burl + "User/Insert",
+                    data: $.param({
+                        "firstname": fname,
+                        "lastname": lname,
+                        "gender": gender,
+                        "email": email,
+                        "phone": phone,
+                        "groupid": groupid,
+                        "username": username,
+                        "password": pass
+                    }),
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                }).success(function (data) {
+                    $("#sms").html(data);
+                    frm.reset();
+                    $("#firstname").focus();
+                });
+            }
+        };
+    });
+</script>
