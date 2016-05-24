@@ -19,15 +19,23 @@ namespace PlantOperation.Controllers
             return View();
         }
         // get data
-        [HttpPost]
+        [HttpGet]
         public ActionResult Get()
         {
-            var pn = Request.Form["pageno"];
+            //var pn = Request.Form["pageno"];
+            //var cmd = new SqlCommand();
+            //cmd.CommandText = "getUserByPage";
+            //cmd.CommandType = CommandType.StoredProcedure;
+            //cmd.Parameters.Add("@pageno", SqlDbType.Int).Value = Convert.ToInt32(pn);
+            //DataTable dt = new DataAdapter().ExecPro(cmd);
+            //var sr = string.Empty;
+            //sr = JsonConvert.SerializeObject(dt);
+            //return Content(sr);
+            
             var cmd = new SqlCommand();
-            cmd.CommandText = "getUserByPage";
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@pageno", SqlDbType.Int).Value = Convert.ToInt32(pn);
-            DataTable dt = new DataAdapter().ExecPro(cmd);
+            cmd.CommandText = "select users.*, [group].name from users inner join [group] on users.groupid=[group].id";
+            cmd.CommandType = CommandType.Text;
+            DataTable dt = new DataAdapter().RunQuery(cmd);
             var sr = string.Empty;
             sr = JsonConvert.SerializeObject(dt);
             return Content(sr);
