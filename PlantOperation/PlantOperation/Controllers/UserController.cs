@@ -56,6 +56,37 @@ namespace PlantOperation.Controllers
             ViewBag.UserId = id.ToString();
             return View("Edit");
         }
+        // change password form
+        public ActionResult ChangePassword()
+        {
+            if (Session["userid"] == null)
+            {
+                return RedirectToAction("login", "User");
+            }
+            return View("ChangePassword");
+        }
+        [HttpPost]
+        public ActionResult ChangePass()
+        {
+            var userid = Request.Form["userid"].ToString();
+            var pass = CoreSecurity.getMd5Hash(Request.Form["pass1"].ToString());
+            var sql = "update users set password=@pass where id=" + userid;
+            var cmd = new SqlCommand();
+            cmd.CommandText = sql;
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.Add("@pass", SqlDbType.VarChar, 50).Value = pass;
+            var i = new DataAdapter().RunNonQuery(cmd);
+            var sms = "";
+            if (i)
+            {
+                sms = "Your password has been changed!";
+            }
+            else
+            {
+                sms = "Cannot change your password.";
+            }
+            return Content(sms);
+        }
         // do login
         [HttpPost]
         public ActionResult DoLogin()
