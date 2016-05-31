@@ -128,6 +128,7 @@
     <Content Include="Content\img\user.png" />
     <Content Include="Content\img\village.png" />
     <Content Include="Content\img\warning.png" />
+    <Content Include="Content\rp.css" />
     <Content Include="Content\table.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -148,6 +149,9 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="fonts\KHMEROS.TTF" />
+    <Content Include="Content\KHMEROS.TTF" />
+    <None Include="Properties\PublishProfiles\done.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

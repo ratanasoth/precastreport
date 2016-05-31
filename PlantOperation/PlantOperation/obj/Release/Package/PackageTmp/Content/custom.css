@@ -1,0 +1,99 @@
+﻿.navbar-top{
+    background: #2d7ead;
+}
+.text-white{
+    color: #EEE;
+}
+.text-white:hover{
+    color: #FFF;
+}
+.navbar-nav li a:link, .navbar-nav li a:visited{
+    color: #EEF;
+}
+.navbar-nav li a:hover, .navbar-nav li a:active, .navbar-nav li a:focus{
+    color: #036;
+}
+ul#menu1>li>a, ul#menu1>li>a:link{
+    color: #333;
+}
+ul#menu1>li>a:hover{
+    color: #036;
+}
+ul.icon{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    padding-left: 27px;
+}
+.icon li{
+    display: inline-block;
+    margin: 4px 18px;
+}
+.icon li a img {
+        -moz-transition: all linear 0.3s;
+        -o-transition: all linear 0.3s;
+        -webkit-transition: all linear 0.3s;
+        transition: all linear 0.3s;
+}
+.icon li a:hover{
+    outline: none;
+    border: none;
+    text-decoration: none;
+
+}
+.icon li a:hover img{
+    box-shadow: 0 0 5px #000;
+}
+.tbl{
+    border: 1px solid #ccc;
+    width: 100%;
+    border-spacing: 0;
+}
+    .tbl thead tr th {
+        border-bottom: none;
+        font-size: 13px;
+        background-image: url('img/bg.png');
+        background-repeat: repeat-x;
+        color: #eef1f3;
+        border-right: 1px solid #eee;
+        padding: 4px 2px 4px 9px;
+    }
+    .tbl thead tr th:last-child{
+        border-right: none;
+    }
+    .tbl tr td{
+        font-size: 13px;
+        color: #036;
+        border-right:1px solid #ccc;
+        border-bottom:1px solid #ccc;
+        padding: 4px 2px 4px 9px;
+    }
+    .tbl tbody tr:last-child td{
+        border-bottom:none;
+    }
+    .tbl tbody tr td:last-child{
+        border-right: none;
+    }
+    .tbl tbody tr {
+        -moz-transition: all linear 0.3s;
+        -o-transition: all linear 0.3s;
+        -webkit-transition: all linear 0.3s;
+        transition: all linear 0.3s;
+    }
+
+    .tbl tbody tr:hover{
+        background: #eef;
+    }
+    .tbl tbody tr:nth-child(even){
+        background: #eef;
+    }
+    .tbl-scroller{
+        height: 270px!important;
+        overflow-y: scroll;
+    }
+    .mybtn{
+        border-radius: 0!important;
+    }
+    .mg-top{
+        margin-top: 7px;
+    }

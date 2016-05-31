@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/template.cshtml";
+}
+<h2 class="text-primary">Dashboard</h2>
+<hr />
+<div class="row">
+    <div class="col-sm-9">
+        <ul class="icon">
+            @if (Session["groupid"].ToString() == "1")
+            {
+                <li>
+                    <a href="~/User/Index">
+                        <img src="~/img/space.png" width="80" />
+                        <p class="text-center">User Control</p>
+                    </a>
+                </li>
+            }
+            
+            <li>
+                <a href="~/Operation">
+                    <img src="~/img/settings.png" width="80" />
+                    <p class="text-center">Operation</p>
+                </a>
+            </li>
+            <li>
+                <a href="~/Report">
+                    <img src="~/img/report.png" width="80" />
+                    <p class="text-center">Report</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+

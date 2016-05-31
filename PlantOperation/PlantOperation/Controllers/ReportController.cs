@@ -25,6 +25,7 @@ namespace PlantOperation.Controllers
                 return RedirectToAction("login", "User");
             }
             ViewBag.StrDate = Request.Form["rdate"].ToString();
+            ViewBag.ToDate = Request.Form["todate"].ToString();
             return View("Report");
         }
     }

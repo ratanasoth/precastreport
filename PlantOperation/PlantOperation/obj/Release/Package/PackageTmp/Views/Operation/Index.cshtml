@@ -1,0 +1,668 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/template.cshtml";
+}
+<style>
+    .tbl1 {
+        width: 100%;
+        border: 1px solid #aaa;
+        border-spacing: 0;
+    }
+
+        .tbl1 thead tr th {
+            font-size: 11px;
+            text-align: center;
+            border-bottom: 1px solid #aaa;
+            border-right: 1px solid #aaa;
+            padding: 1px 2px;
+        }
+
+            .tbl1 thead tr th:last-child {
+                border-right: none;
+            }
+
+        .tbl1 tbody tr td {
+            text-align: center;
+            border-bottom: 1px solid #aaa;
+            border-right: 1px solid #aaa;
+            font-size: 11px;
+        }
+
+            .tbl1 tbody tr td:last-child {
+                border-right: none;
+            }
+
+    .mybtn {
+        border-radius: 0;
+        width: 100%;
+    }
+
+    td input[type=number], td input[type=date], td input[type=text] {
+        width: 100%;
+        outline: none;
+        border: none;
+        text-align: center;
+    }
+    #total td{
+        font-weight: bold;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-12">
+        <h2 class="text-primary">
+            Plant Operation
+        </h2>
+    </div>
+</div>
+<hr />
+<div class="row" ng-app="ngApp" ng-controller="ctrl">
+    <div class="col-sm-12">
+        <form id="frm" name="frm" method="post">
+            <table class="tbl1">
+                <thead>
+                    <tr>
+                        <th rowspan="2">Date</th>
+                        <th rowspan="2">Primary<br />(Hrs)</th>
+                        <th colspan="6">Aggrecate Type(mm)</th>
+                        <th rowspan="2">L<br />1</th>
+                        <th rowspan="2">L<br />2</th>
+                        <th rowspan="2">L<br />3</th>
+                        <th rowspan="2">L<br />4</th>
+                        <th rowspan="2">L<br />5</th>
+                        <th rowspan="2">L<br />6</th>
+                        <th rowspan="2">L<br />7</th>
+                        <th rowspan="2">L<br />8</th>
+                        <th rowspan="2">L<br />9</th>
+                        <th rowspan="2">L<br />10</th>
+                        <th rowspan="2">L<br />11</th>
+                        <th rowspan="2">L<br />12</th>
+                        <th rowspan="2">L<br />13</th>
+                        <th colspan="4">Liner charge</th>
+                        <th colspan="3">Weather</th>
+                        <th rowspan="2">Notes</th>
+                        <th rowspan="2">Action</th>
+                    </tr>
+                    <tr>
+                        <th>12</th>
+                        <th>19</th>
+                        <th>1x2</th>
+                        <th>2x3</th>
+                        <th>M-30</th>
+                        <th>others</th>
+                        <th>CS430</th>
+                        <th>CH440</th>
+                        <th>St.CJ411</th>
+                        <th>Sw.CJ411</th>
+                        <th>Sunny</th>
+                        <th>Cloudy</th>
+                        <th>Rain</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr pid="0" id="trinput">
+                        <td>
+                            <input type="date" value="" id="date" name="date" />
+                        </td>
+                        <td>
+                            <input type="number" value="0" id="primary" name="primary" />
+                        </td>
+                        <td>
+                            <input type="number" id="a12" name="a12" value="0" />
+                        </td>
+                        <td>
+                            <input type="number" id="a19" name="a19" value="0" />
+                        </td>
+                        <td>
+                            <input type="number" id="a1x2" name="a1x2" value="0" />
+                        </td>
+                        <td>
+                            <input type="number" id="a2x3" name="a2x3" value="0" />
+                        </td>
+                        <td>
+                            <input type="number" id="m30" name="m30" value="0" />
+                        </td>
+                        <td>
+                            <input type="number" id="other" name="other" value="0" />
+                        </td>
+                        <td>
+                            <input type="number" id="l1" name="l1" value="0" />
+                        </td>
+                        <td>
+                            <input type="number" id="l2" name="l2" value="0" />
+                        </td>
+                        <td>
+                            <input type="number" id="l3" name="l3" value="0" />
+                        </td>
+                        <td>
+                            <input type="number" id="l4" name="l4" value="0" />
+                        </td>
+                        <td>
+                            <input type="number" id="l5" name="l5" value="0" />
+                        </td>
+                        <td>
+                            <input type="number" id="l6" name="l6" value="0" />
+                        </td>
+                        <td>
+                            <input type="number" id="l7" name="l7" value="0" />
+                        </td>
+                        <td>
+                            <input type="number" id="l8" name="l8" value="0" />
+                        </td>
+                        <td>
+                            <input type="number" id="l9" name="l9" value="0" />
+                        </td>
+                        <td>
+                            <input type="number" id="l10" name="l10" value="0" />
+                        </td>
+                        <td>
+                            <input type="number" id="l11" name="l11" value="0" />
+                        </td>
+                        <td>
+                            <input type="number" id="l12" name="l12" value="0" />
+                        </td>
+                        <td>
+                            <input type="number" id="l13" name="l13" value="0" />
+                        </td>
+                        <td>
+  
+                            <input type="checkbox" id="cs430" name="cs430" value="0" class="ch" />
+                        </td>
+                        <td>
+                            <input type="checkbox" id="ch440" name="ch440" value="0" class="ch" />
+                        </td>
+                        <td>
+                            <input type="checkbox" id="stcj411" name="stcj411" value="0" class="ch" />
+                        </td>
+                        <td>
+                            <input type="checkbox" id="swcj411" name="swcj411" value="0" class="ch" />
+                        </td>
+                        <td>
+                            <input type="checkbox" id="sunny" name="sunny" value="0" class="ch1" />
+                        </td>
+                        <td>
+                            <input type="checkbox" id="cloudy" name="cloudy" value="0" class="ch1" />
+                        </td>
+                        <td>
+                            <input type="checkbox" id="rain" name="rain" value="0" class="ch1" />
+                        </td>
+                        <td style="width: 63px">
+                            <input type="text" id="note" name="note" value="" />
+                        </td>
+                        <td>
+                            <a href="#" class="btn btn-primary btn-xs mybtn" id="btnSave"><i class="glyphicon glyphicon-save"></i> Save</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+        <hr />
+        <table class="tbl1">
+            <thead>
+                <tr>
+                    <th rowspan="2">Date</th>
+                    <th rowspan="2">Primary<br />(Hrs)</th>
+                    <th rowspan="2">Secondary<br />(Hrs)</th>
+                    <th colspan="6">Aggrecate Type(mm)</th>
+                    <th rowspan="2"># of Trucks</th>
+                    <th rowspan="2">L<br />1</th>
+                    <th rowspan="2">L<br />2</th>
+                    <th rowspan="2">L<br />3</th>
+                    <th rowspan="2">L<br />4</th>
+                    <th rowspan="2">L<br />5</th>
+                    <th rowspan="2">L<br />6</th>
+                    <th rowspan="2">L<br />7</th>
+                    <th rowspan="2">L<br />8</th>
+                    <th rowspan="2">L<br />9</th>
+                    <th rowspan="2">L<br />10</th>
+                    <th rowspan="2">L<br />11</th>
+                    <th rowspan="2">L<br />12</th>
+                    <th rowspan="2">L<br />13</th>
+                    <th colspan="4">Liner charge</th>
+                    <th colspan="3">Weather</th>
+                    <th rowspan="2">Notes</th>
+                    <th rowspan="2">Action</th>
+                </tr>
+                <tr>
+                    <th>12</th>
+                    <th>19</th>
+                    <th>1x2</th>
+                    <th>2x3</th>
+                    <th>M-30</th>
+                    <th>others</th>
+                    <th>CS430</th>
+                    <th>CH440</th>
+                    <th>St.CJ411</th>
+                    <th>Sw.CJ411</th>
+                    <th>Sunny</th>
+                    <th>Cloudy</th>
+                    <th>Rain</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="p in op" opid="{{p.id}}" onclick="rS(this)">
+                    <td>{{p.date}}</td>
+                    <td>{{p.primary}}</td>
+                    <td>{{p.secondary}}</td>
+                    <td>{{p.a12}}</td>
+                    <td>{{p.a19}}</td>
+                    <td>{{p.a1x2}}</td>
+                    <td>{{p.a2x3}}</td>
+                    <td>{{p.m30}}</td>
+                    <td>{{p.other}}</td>
+                    <td>{{p.truck}}</td>
+                    <td>{{p.l1}}</td>
+                    <td>{{p.l2}}</td>
+                    <td>{{p.l3}}</td>
+                    <td>{{p.l4}}</td>
+                    <td>{{p.l5}}</td>
+                    <td>{{p.l6}}</td>
+                    <td>{{p.l7}}</td>
+                    <td>{{p.l8}}</td>
+                    <td>{{p.l9}}</td>
+                    <td>{{p.l10}}</td>
+                    <td>{{p.l11}}</td>
+                    <td>{{p.l12}}</td>
+                    <td>{{p.l13}}</td>
+                    <td>
+                        <span ng-if="p.cs430==1"><input type="checkbox" value="1" checked /></span>
+                        <span ng-if="p.cs430==0"><input type="checkbox" value="0" /></span>
+                    </td>
+                    <td>
+                        <span ng-if="p.ch440==1"><input type="checkbox" value="1" checked /></span>
+                        <span ng-if="p.ch440==0"><input type="checkbox" value="0" /></span>
+                    </td>
+                    <td>
+                        <span ng-if="p.stcj411==1"><input type="checkbox" value="1" checked /></span>
+                        <span ng-if="p.stcj411==0"><input type="checkbox" value="0" /></span>
+                    </td>
+                    <td>
+                        <span ng-if="p.swcj411==1"><input type="checkbox" value="1" checked /></span>
+                        <span ng-if="p.swcj411==0"><input type="checkbox" value="0" /></span>
+                    </td>
+                    <td>
+                        <span ng-if="p.sunny==true"><input type="checkbox" value="1" checked /></span>
+                        <span ng-if="p.sunny==false"><input type="checkbox" value="0" /></span>
+                    </td>
+                    <td>
+                        <span ng-if="p.cloudy==true"><input type="checkbox" value="1" checked /></span>
+                        <span ng-if="p.cloudy==false"><input type="checkbox" value="0" /></span>
+                    </td>
+                    <td>
+                        <span ng-if="p.rain==true"><input type="checkbox" value="1" checked /></span>
+                        <span ng-if="p.rain==false"><input type="checkbox" value="0" /></span>
+                    </td>
+                    <td style="width: 63px">{{p.note}}</td>
+                    <td>
+                        @if (Session["groupid"].ToString() != "2")
+                        {
+                            <a href="#" class="btn btn-link btn-xs" pid="{{p.id}}" cdate="{{p.fulldate}}" ng-click="delete($event)"><i class="glyphicon glyphicon-trash"></i></a>
+                        }
+                        
+                    </td>
+                </tr>
+                <tr id="total">
+                    <td>Total</td>
+                    <td id="t1">00</td>
+                    <td id="t2">00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td id="t3">00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+</div>
+</div>
+<script src="~/Scripts/angular.min.js"></script>
+<script>
+    var d = new Date();
+    var m = d.getMonth() + 1;
+    var dd = d.getDate();
+    var y = d.getFullYear();
+    m = m < 10 ? "0" + m : m;
+    dd = dd < 10 ? "0" + dd : dd;
+    var cdate = y + "-" + m + "-" + dd;
+    window.onload = function () {
+        document.getElementById("date").value = cdate;
+    };
+    var burl = '@Url.Content("~" )';
+    var ngApp = angular.module('ngApp', []);
+    ngApp.controller('ctrl', function ($scope, $http) {
+        $http({
+            method: 'POST',
+            url: burl + "Operation/Get",
+            data: $.param({
+                "date": cdate
+            }),
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }).success(function (data) {
+            $scope.op = data;
+            getTotal(cdate);
+        });
+        // let check only one checkbox at a time for weather control
+        $(".ch1").click(function () {
+            $(".ch1").not(this).attr("checked", false);
+            $(".ch1").not(this).val("0");
+            if ($(this).attr("checked")==true) {
+                $(this).removeAttr("checked");
+                $(this).val("0");
+            }
+            else {
+                $(this).attr("checked", true);
+                $(this).val("1");
+            }
+          
+        });
+        // control check for liner charge
+        $(".ch").click(function () {
+            $(".ch").not(this).attr("checked", false);
+            $(".ch").not(this).val("0");
+            if ($(this).attr("checked") == true) {
+                $(this).removeAttr("checked");
+                $(this).val("0");
+            }
+            else {
+                $(this).attr("checked", true);
+                $(this).val("1");
+            }
+
+        });
+        $("#date").change(function () {
+            var strd = $("#date").val();
+            $http({
+                method: 'POST',
+                url: burl + "Operation/Get",
+                data: $.param({
+                    "date": strd
+                }),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            }).success(function (data) {
+                $scope.op = data;
+                getTotal(strd);
+            });
+        });
+        // changing check box value
+        $("td input[type='checkbox']").click(function () {
+            if (this.checked) {
+                this.value = "1";
+            }
+            else {
+                this.value = "0";
+            }
+        });
+        // delete a report by id
+        $scope.delete = function ($event) {
+            var btn = $event.currentTarget;
+            var id = $(btn).attr("pid");
+            var cdate = $(btn).attr("cdate");
+            var o = confirm("You want to delete?");
+            if (o) {
+                $http({
+                    method: 'POST',
+                    url: burl + "Operation/Delete",
+                    data: $.param({
+                        "id": id,
+                        "cdate": cdate
+                    }),
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                }).success(function (data) {
+                    if (data=="no") {
+                        alert("You have permisson to delete this record.");
+                    }
+                    else {
+                        $(btn).parent().parent().remove();
+                        getTotal(cdate);
+                    }
+                });
+            }
+        };
+        // fire btnSave to insert or update data
+        $("#btnSave").click(function (e) {
+            e.preventDefault();
+            insertUpdate();
+        });
+        // auto focus and select data
+        $("input[type='number']").focus(function () {
+            $(this).select();
+        });
+        // press inter to insert or update
+        $("input[type='number']").keydown(function (e) {
+            if (e.keyCode==13) {
+                insertUpdate();
+            }
+        });
+        // function to insert or update data
+        function insertUpdate() {
+            // get data from user input as query string
+            var str = $("#frm").serialize().toString();
+            var s = $("#sunny").val();
+            var c = $("#cloudy").val();
+            var r = $("#rain").val();
+            str += "&s=" + s + "&c=" + c + "&r=" + r;
+            var c1, c2, c3, c4;
+            c1 = $("#cs430").val();
+            c2 = $("#ch440").val();
+            c3 = $("#stcj411").val();
+            c4 = $("#swcj411").val();
+            str += "&c1=" + c1 + "&c2=" + c2 + "&c3=" + c3 + "&c4=" + c4;
+            // get process id
+            var pid = $("#trinput").attr("pid");
+            var o = confirm("DO you want to save changes?");
+            if (o) {
+                // if pid=0, means insert, otherwise, update
+                if (pid > 0) {
+                    // update data
+                    $http({
+                        method: 'POST',
+                        url: burl + "Operation/Update",
+                        data: $.param({
+                            "str": str + "&id=" + pid
+                        }),
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                    }).success(function (data) {
+                        $scope.op = data;
+                        var sdate = $("#date").val();
+                        frm.reset();
+                        $("#trinput").attr("pid", "0");
+                        var tr = $("tr[row-selected='true']");
+                        $(tr).attr("row-selected", "false");
+                        $(tr).css("background", "none");
+                        $("#date").val(sdate);
+                        getTotal(sdate);
+                    });
+                }
+                else {
+                    // insert data
+                    $http({
+                        method: 'POST',
+                        url: burl + "Operation/Insert",
+                        data: $.param({
+                            "str": str
+                        }),
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                    }).success(function (data) {
+                        var sdate = $("#date").val();
+                        $scope.op = data;
+                        getTotal(sdate);
+                    });
+                }
+                // clear check box
+                $(".ch1").each(function () {
+                    $(this).removeAttr("checked");
+                    $(this).val("0");
+                });
+                // reset liner charge
+                $(".ch").each(function () {
+                    $(this).removeAttr("checked");
+                    $(this).val("0");
+                });
+            }
+
+        }
+        // function to find total
+        function getTotal(strDate)
+        {
+            // insert data
+            $http({
+                method: 'POST',
+                url: burl + "Operation/GetTotal",
+                data: $.param({
+                    "date": strDate
+                }),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            }).success(function (data) {
+                $("#t1").html(data[0].t1);
+                $("#t2").html(data[0].t2);
+                $("#t3").html(data[0].t3);
+            });
+        }
+    });
+    // highlight row
+    function rS(tr) {
+        var t = $(tr);
+        var sel = $(t).attr("row-selected");
+        // get selected row id
+        var opid = $(tr).attr("opid");
+        if (sel == 'true') {
+            $(t).css("background", "none");
+            $(t).attr("row-selected", "false");
+            $("#trinput").attr("pid", "0");
+            frm.reset();
+            // reset weather checkbox
+            $(".ch1").attr("checked",false);
+            $(".ch1").val("0");
+            // reset liner charge
+            $(".ch").attr("checked", false);
+            $(".ch").val("0");
+            // reset the current date
+            document.getElementById("date").value = cdate;
+        }
+        else {
+            $(t).siblings().css("background", "none");
+            $(t).siblings().attr("row-selected", 'false');
+            $(t).css("background", "#ccc");
+            $(t).attr("row-selected", "true");
+            // set id for update on the input row
+            $("#trinput").attr("pid", opid);
+            // load data to input form for edit
+            $.ajax({
+                type: "POST",
+                url: burl + "Operation/GetById",
+                data: { 'id': $("#trinput").attr("pid") },
+                dataType: "json",
+                success: function (data) {
+                    // put data to the form
+                    $("#date").val(data[0].fulldate);
+                    $("#primary").val(data[0].primary);
+                    $("#secondary").val(data[0].secondary);
+                    $("#a12").val(data[0].a12);
+                    $("#a19").val(data[0].a19);
+                    $("#a1x2").val(data[0].a1x2);
+                    $("#a2x3").val(data[0].a2x3);
+                    $("#m30").val(data[0].m30);
+                    $("#other").val(data[0].other);
+                    $("#l1").val(data[0].l1);
+                    $("#l2").val(data[0].l2);
+                    $("#l3").val(data[0].l3);
+                    $("#l4").val(data[0].l4);
+                    $("#l5").val(data[0].l5);
+                    $("#l6").val(data[0].l6);
+                    $("#l7").val(data[0].l7);
+                    $("#l8").val(data[0].l8);
+                    $("#l9").val(data[0].l9);
+                    $("#l10").val(data[0].l10);
+                    $("#l11").val(data[0].l11);
+                    $("#l12").val(data[0].l12);
+                    $("#l13").val(data[0].l13);
+                    $("#l1").val(data[0].l1);
+
+                    if (data[0].cs430 == 1) {
+                        $("#cs430").prop("checked", true);
+                        $("#cs430").val("1");
+                    }
+                    else {
+                        $("#cs430").removeAttr("checked");
+                        $("#cs430").val("0");
+                    }
+                    if (data[0].ch440 == 1) {
+                        $("#ch440").prop("checked", true);
+                        $("#ch440").val("1");
+                    }
+                    else {
+                        $("#ch440").removeAttr("checked");
+                        $("#ch440").val("0");
+                    }
+                    if (data[0].stcj411 == 1) {
+                        $("#stcj411").prop("checked", true);
+                        $("#stcj411").val("1");
+                    }
+                    else {
+                        $("#stcj411").removeAttr("checked");
+                        $("#stcj411").val("0");
+                    }
+
+                    if (data[0].swcj411==1) {
+                        $("#swcj411").prop("checked", true);
+                        $("#swcj411").val("1");
+                    }
+                    else {
+                        $("#swcj411").removeAttr("checked");
+                        $("#swcj411").val("0");
+                    }
+                    if (data[0].sunny ==1) {
+                        $("#sunny").prop("checked", true);
+                        $("#sunny").val("1");
+                    }
+                    else {
+                        $("#sunny").removeAttr("checked");
+                        $("#sunny").val("0");
+                    }
+                    if (data[0].cloudy ==1) {
+                        $("#cloudy").prop("checked", true);
+                        $("#cloudy").val(1);
+                    }
+                    else {
+                        $("#cloudy").removeAttr("checked");
+                        $("#cloudy").val(0);
+                    }
+                    if (data[0].rain ==1) {
+                        $("#rain").prop("checked", true);
+                        $("#rain").val(1);
+                    }
+                    else {
+                        $("#rain").removeAttr("checked");
+                        $("#rain").val(0);
+                    }
+                    $("#note").val(data[0].note);
+                }
+            });
+           
+        }
+    }
+</script>

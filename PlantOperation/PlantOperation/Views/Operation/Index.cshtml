@@ -3,6 +3,11 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/template.cshtml";
 }
+@{ 
+    var month = DateTime.Now.Month.ToString("00");
+    var year = DateTime.Now.Year.ToString();
+    var mindate = year + "-" + month + "-01";
+}
 <style>
     .tbl1 {
         width: 100%;
@@ -65,22 +70,22 @@
                         <th rowspan="2">Date</th>
                         <th rowspan="2">Primary<br />(Hrs)</th>
                         <th colspan="6">Aggrecate Type(mm)</th>
-                        <th rowspan="2">L<br />1</th>
-                        <th rowspan="2">L<br />2</th>
-                        <th rowspan="2">L<br />3</th>
-                        <th rowspan="2">L<br />4</th>
-                        <th rowspan="2">L<br />5</th>
-                        <th rowspan="2">L<br />6</th>
-                        <th rowspan="2">L<br />7</th>
-                        <th rowspan="2">L<br />8</th>
-                        <th rowspan="2">L<br />9</th>
-                        <th rowspan="2">L<br />10</th>
-                        <th rowspan="2">L<br />11</th>
-                        <th rowspan="2">L<br />12</th>
-                        <th rowspan="2">L<br />13</th>
+                        <th rowspan="2">L1</th>
+                        <th rowspan="2">L2</th>
+                        <th rowspan="2">L3</th>
+                        <th rowspan="2">L4</th>
+                        <th rowspan="2">L5</th>
+                        <th rowspan="2">L6</th>
+                        <th rowspan="2">L7</th>
+                        <th rowspan="2">L8</th>
+                        <th rowspan="2">L9</th>
+                        <th rowspan="2">L10</th>
+                        <th rowspan="2">L11</th>
+                        <th rowspan="2">L12</th>
+                        <th rowspan="2">L13</th>
                         <th colspan="4">Liner charge</th>
                         <th colspan="3">Weather</th>
-                        <th rowspan="2">Notes</th>
+                        <th rowspan="2" style="width: 180px">Notes</th>
                         <th rowspan="2">Action</th>
                     </tr>
                     <tr>
@@ -102,7 +107,16 @@
                 <tbody>
                     <tr pid="0" id="trinput">
                         <td>
-                            <input type="date" value="" id="date" name="date" />
+                            @if (Session["groupid"].ToString() == "1")
+                            {
+                                <input type="date" value="" id="date" name="date" />
+                            }
+                            else
+                            {
+                                <input type="date" value="" id="date" name="date" min="@mindate" />
+                            }
+
+
                         </td>
                         <td>
                             <input type="number" value="0" id="primary" name="primary" />
@@ -205,22 +219,22 @@
                     <th rowspan="2">Secondary<br />(Hrs)</th>
                     <th colspan="6">Aggrecate Type(mm)</th>
                     <th rowspan="2"># of Trucks</th>
-                    <th rowspan="2">L<br />1</th>
-                    <th rowspan="2">L<br />2</th>
-                    <th rowspan="2">L<br />3</th>
-                    <th rowspan="2">L<br />4</th>
-                    <th rowspan="2">L<br />5</th>
-                    <th rowspan="2">L<br />6</th>
-                    <th rowspan="2">L<br />7</th>
-                    <th rowspan="2">L<br />8</th>
-                    <th rowspan="2">L<br />9</th>
-                    <th rowspan="2">L<br />10</th>
-                    <th rowspan="2">L<br />11</th>
-                    <th rowspan="2">L<br />12</th>
-                    <th rowspan="2">L<br />13</th>
+                    <th rowspan="2">L1</th>
+                    <th rowspan="2">L2</th>
+                    <th rowspan="2">L3</th>
+                    <th rowspan="2">L4</th>
+                    <th rowspan="2">L5</th>
+                    <th rowspan="2">L6</th>
+                    <th rowspan="2">L7</th>
+                    <th rowspan="2">L8</th>
+                    <th rowspan="2">L9</th>
+                    <th rowspan="2">L10</th>
+                    <th rowspan="2">L11</th>
+                    <th rowspan="2">L12</th>
+                    <th rowspan="2">L13</th>
                     <th colspan="4">Liner charge</th>
                     <th colspan="3">Weather</th>
-                    <th rowspan="2">Notes</th>
+                    <th rowspan="2" style="width:180px">Notes</th>
                     <th rowspan="2">Action</th>
                 </tr>
                 <tr>
@@ -341,6 +355,7 @@
 </div>
 <script src="~/Scripts/angular.min.js"></script>
 <script>
+    alert('@mindate');
     var d = new Date();
     var m = d.getMonth() + 1;
     var dd = d.getDate();
@@ -665,4 +680,5 @@
            
         }
     }
+   
 </script>

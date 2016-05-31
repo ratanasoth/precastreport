@@ -14,8 +14,12 @@
 <hr />
 <form id="frm" name="frm" method="post" target="_blank" action="~/Report/ViewReport">
     <label>
-        Date
+        From Date
         <input type="date" name="rdate" id="rdate" value="" />
+    </label>
+    <label>
+        To Date 
+        <input type="date" name="todate" id="todate" value="" />
     </label>
     <button type="submit" class="btn btn-primary btn-xs" style="border-radius:0;padding:3px 2px">View Report</button>
     <button type="button" id="btnExcel" class="btn btn-success btn-xs" style="border-radius:0;padding:3px 2px">Export to Excel</button>
@@ -33,6 +37,7 @@
     window.onload = function()
     {
         $("#rdate").val(cdate);
+        $("#todate").val(cdate);
     }
     $(document).ready(function () {
         $("#btnExcel").click(function () {

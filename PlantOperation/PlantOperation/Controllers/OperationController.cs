@@ -176,6 +176,21 @@ namespace PlantOperation.Controllers
             return Content(sr);
         }
         [HttpPost]
+        public ActionResult GetReport()
+        {
+            var fromdate = Request.Form["date"].ToString();
+            var todate = Request.Form["todate"].ToString();
+            var com = new SqlCommand();
+            com.CommandText = "getReport";
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.Add("@fromdate", SqlDbType.VarChar, 50).Value = fromdate;
+            com.Parameters.Add("@todate", SqlDbType.VarChar, 50).Value = todate;
+            DataTable dt = new DataAdapter().ExecPro(com);
+            var sr = string.Empty;
+            sr = JsonConvert.SerializeObject(dt);
+            return Content(sr);
+        }
+        [HttpPost]
         public ActionResult GetById()
         {
             var id = Request.Form["id"].ToString();
@@ -191,15 +206,12 @@ namespace PlantOperation.Controllers
         [HttpPost]
         public ActionResult GetTotal()
         {
-            string dd = Request.Form["date"].ToString();
-            var dstr = Convert.ToDateTime(dd);
-            var month = dstr.Month.ToString();
-            var year = dstr.Year.ToString();
+
             var cmd = new SqlCommand();
             cmd.CommandText = "getTotal";
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@month", SqlDbType.Int).Value = month;
-            cmd.Parameters.Add("@year", SqlDbType.Int).Value = year;
+            cmd.Parameters.Add("@fromdate", SqlDbType.VarChar, 50).Value = Request.Form["fromdate"].ToString() ;
+            cmd.Parameters.Add("@todate", SqlDbType.VarChar, 50).Value = Request.Form["todate"].ToString();
             DataTable dt = new DataAdapter().ExecPro(cmd);
             var sr = string.Empty;
             sr = JsonConvert.SerializeObject(dt);

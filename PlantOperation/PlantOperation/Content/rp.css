@@ -1,0 +1,8 @@
+﻿@font-face{
+    font-family: kh;
+    src: url(KHMEROS.TTF);
+}
+.khmer{
+    font-family: kh;
+    font-size: 9px;
+}

@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>Plant Operation Report</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/rp.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.9.1.min.js"></script>
     <style>
          .tbl1 {
@@ -19,10 +20,13 @@
     }
 
         .tbl1 thead tr th {
-            font-size: 11px;
+            font-size: 9px;
             text-align: center;
             border-bottom: 1px solid #aaa;
             border-right: 1px solid #aaa;
+            font-weight: normal;
+            font-family: Arial;
+            padding: 2px;
         }
 
             .tbl1 thead tr th:last-child {
@@ -33,7 +37,8 @@
             text-align: center;
             border-bottom: 1px solid #aaa;
             border-right: 1px solid #aaa;
-            font-size: 11px;
+            font-size: 9px;
+            font-family: Arial;
         }
 
             .tbl1 tbody tr td:last-child {
@@ -52,7 +57,8 @@
         text-align: center;
     }
     #total td{
-        font-weight: bold;
+        font-weight: normal;
+        font-size: 9px;
     }
     body{
         padding:2px 3px;
@@ -72,27 +78,27 @@
             <table class="tbl1" id="tt">
                 <thead>
                     <tr>
-                        <th rowspan="2">Date</th>
-                        <th rowspan="2">Primary<br />(Hrs)</th>
-                        <th rowspan="2">Secondary<br />(Hrs)</th>
-                        <th colspan="6">Aggrecate Type(mm)</th>
-                        <th rowspan="2"># of Trucks</th>
-                        <th rowspan="2">L<br />1</th>
-                        <th rowspan="2">L<br />2</th>
-                        <th rowspan="2">L<br />3</th>
-                        <th rowspan="2">L<br />4</th>
-                        <th rowspan="2">L<br />5</th>
-                        <th rowspan="2">L<br />6</th>
-                        <th rowspan="2">L<br />7</th>
-                        <th rowspan="2">L<br />8</th>
-                        <th rowspan="2">L<br />9</th>
-                        <th rowspan="2">L<br />10</th>
-                        <th rowspan="2">L<br />11</th>
-                        <th rowspan="2">L<br />12</th>
-                        <th rowspan="2">L<br />13</th>
-                        <th colspan="4">Liner charge</th>
-                        <th colspan="3">Weather</th>
-                        <th rowspan="2">Notes</th>
+                        <th rowspan="2">Date<br /><span class="khmer">ថ្ងៃទី</span></th>
+                        <th rowspan="2">Primary<br /><span class="khmer">(ម៉ោង)</span></th>
+                        <th rowspan="2">Secondary<br /><span class="khmer">(ម៉ោង)</span></th>
+                        <th colspan="6">Aggrecate Type(mm)<br /><span class="khmer">(ប្រភេទថ្ម)</span></th>
+                        <th rowspan="2"># of Trucks<br /><span class="khmer">(ចំនួនឡាន)</span></th>
+                        <th rowspan="2">L1</th>
+                        <th rowspan="2">L2</th>
+                        <th rowspan="2">L3</th>
+                        <th rowspan="2">L4</th>
+                        <th rowspan="2">L5</th>
+                        <th rowspan="2">L6</th>
+                        <th rowspan="2">L7</th>
+                        <th rowspan="2">L8</th>
+                        <th rowspan="2">L9</th>
+                        <th rowspan="2">L10</th>
+                        <th rowspan="2">L11</th>
+                        <th rowspan="2">L12</th>
+                        <th rowspan="2">L13</th>
+                        <th colspan="4">Liner charge<br /><span class="khmer">(ដូរត្បាល់)</span></th>
+                        <th colspan="3">Weather<br /><span class="khmer">(ធាតុអាកាស)</span></th>
+                        <th rowspan="2" style="width: 180px">Notes<br/><span class="khmer">(កំណត់សម្គាល់)</span></th>
                     </tr>
                     <tr>
                         <th>12</th>
@@ -152,21 +158,21 @@
                             <span ng-if="p.swcj411==0"><input type="checkbox" value="0" /></span>
                         </td>
                         <td>
-                            <span ng-if="p.sunny==true"><input type="checkbox" value="1" checked /></span>
-                            <span ng-if="p.sunny==false"><input type="checkbox" value="0" /></span>
+                            <span ng-if="p.sunny==true">Sunny</span>
+                            <span ng-if="p.sunny==false"></span>
                         </td>
                         <td>
-                            <span ng-if="p.cloudy==true"><input type="checkbox" value="1" checked /></span>
-                            <span ng-if="p.cloudy==false"><input type="checkbox" value="0" /></span>
+                            <span ng-if="p.cloudy==true">Cloudy</span>
+                            <span ng-if="p.cloudy==false"></span>
                         </td>
                         <td>
-                            <span ng-if="p.rain==true"><input type="checkbox" value="1" checked /></span>
-                            <span ng-if="p.rain==false"><input type="checkbox" value="0" /></span>
+                            <span ng-if="p.rain==true">Rain</span>
+                            <span ng-if="p.rain==false"></span>
                         </td>
                         <td style="width: 63px">{{p.note}}</td>
                     </tr>
                     <tr id="total">
-                        <td>Total</td>
+                        <td>Total<br /><span class="khmer">សរុប</span></td>
                         <td id="t1">00</td>
                         <td id="t2">00</td>
                         <td></td>
@@ -197,7 +203,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td></td>
+                     
                     </tr>
                 </tbody>
             </table>
@@ -212,29 +218,31 @@
         ngApp.controller('ctrl', function ($scope, $http) {
             $http({
                 method: 'POST',
-                url: burl + "Operation/Get",
+                url: burl + "Operation/GetReport",
                 data: $.param({
-                    "date": strdate
+                    "date": '@ViewBag.StrDate',
+                    "todate": '@ViewBag.ToDate'
                 }),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (data) {
                 $scope.op = data;
-                getTotal(strdate);
+                getTotal('@ViewBag.StrDate', '@ViewBag.ToDate');
             });
             // function to find total
-            function getTotal(strDate) {
+            function getTotal(d1,d2) {
                 // insert data
                 $http({
                     method: 'POST',
                     url: burl + "Operation/GetTotal",
                     data: $.param({
-                        "date": strDate
+                        "fromdate": d1,
+                        "todate": d2
                     }),
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                 }).success(function (data) {
-                    $("#t1").html(data[0].t1);
-                    $("#t2").html(data[0].t2);
-                    $("#t3").html(data[0].t3);
+                    $("#t1").html(data[0].t1 + " hours");
+                    $("#t2").html(data[0].t2 + " hours");
+                    $("#t3").html(data[0].t3 + " trucks");
                 });
             }
         });
